@@ -5,13 +5,11 @@ import { getCityDataFromAPI } from "../utils/apiRequest";
 class Search extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.searchedText = "";
-    this.icon = 
 
     this.state = {
       cityInformations: "",
-      icon: ""
     };
   }
 
@@ -21,36 +19,47 @@ class Search extends React.Component {
 
   async getCity(city) {
     const response = await getCityDataFromAPI(city);
-    if (response) {
+    if (response && typeof response === "object") {
       console.log("requête ok");
       console.log(response);
       this.setState({ cityInformations: response }, () =>
-        // console.log(this.state.cityInformations);
-        this.setState({ icon : 'http://openweathermap.org/img/w/' + this.state.cityInformations.weather[0].icon + '.png' })
+        console.log(this.state.cityInformations)
       );
+    } else {
+      console.log("erreur " + response);
     }
   }
 
   render() {
     return (
-      <View>
-        <Text>Choisissez une ville</Text>
+      <View style={styles.bodyStyle, styles.main}>
+        <Text style={styles.label}>Choisissez une ville</Text>
         <TextInput
-          style={styles.textInput}
+          style={styles.input}
           onChangeText={(text) => this.setCityInput(text)}
         ></TextInput>
         <Button
-          style={styles.textInput}
+          style={styles.button}
           onPress={() => this.getCity(this.searchedText)}
           title="Valider"
         ></Button>
-        
+
         {this.state.cityInformations !== "" ? (
-          <View style={styles.view}>
+          <View style={styles.results}>
             <Text>{this.state.cityInformations.name}</Text>
             <Text>{this.state.cityInformations.main.temp}°C</Text>
-            <Image style={styles.image} source={{ uri: this.state.icon }}></Image>
-            <Text>{this.state.cityInformations.weather[0].main}</Text>
+            <View style={styles.view}>
+              <Image
+                style={styles.image}
+                source={{
+                  uri:
+                    "http://openweathermap.org/img/wn/" +
+                    this.state.cityInformations.weather[0].icon +
+                    ".png",
+                }}
+              ></Image>
+            </View>
+            {/* <Text>{this.state.cityInformations.weather[0].main}</Text> */}
           </View>
         ) : (
           <Text>Pas de ville sélectionnée</Text>
@@ -61,16 +70,39 @@ class Search extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  main: {
+    paddingTop: 200,
+    padding : 40,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontSize: '20px'
+  },
   image: {
-    width: '100px'
+    width: "50px",
+    height: "50px",
+    margin: "0 auto",
   },
-  view : {
-    textAlign : 'center'
+  results: {
+    flex: 1,
+    padding: 40,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+},
+  label: {
+    color: "black",
+    fontSize: 20,
+    padding: 20
   },
-  textInput: {
-    height: "20px",
-    color: "darkblue",
-    backgroundColor: "white",
+  form: {
+    borderColor: "#47B1E1",
+  },
+  input: {
+    width: "100%",
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
   },
   button: {
     color: "white",

@@ -1,22 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Search from './components/Search'
+import React from "react";
+import { StyleSheet } from "react-native";
+import { init } from "@rematch/core";
+import { Provider } from "react-redux";
+import Navigator from "./navigation/Navigator";
+import { user } from './models/userModel';
+// import { meteo } from './models/meteoModel';
+
+const store = init({
+  models: { user },
+});
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Search></Search>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <Navigator></Navigator>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'skyblue',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "skyblue",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -1,5 +1,5 @@
 const baseUrl =
-  " https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/";
+  "https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/";
 const apiKey = "71464885ca13518dd3f388d0479a37d7";
 
 export function getCityDataFromAPI(query = "") {
