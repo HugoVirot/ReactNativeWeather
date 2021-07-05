@@ -3,12 +3,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const user = {
 
   state: {
-    name: '',
+    userName: '',
   },
 
   reducers: {                               
-    setName(state, { name }) {
-      return { ...state, name };
+    setName(state, { userName }) {
+      console.log(userName)
+      return { ...state, userName };
     },
   },
 
@@ -16,17 +17,17 @@ export const user = {
 
     async storeName(payload) {
 
-      const { name } = payload;
+      const { userName } = payload;
 
-      if (name !== '') {      //si le nom a été défini
+      if (userName !== '') {      //si le nom a été défini
 
         // ajout du nom dans l'asyncstorage
-        await AsyncStorage.setItem('name', name);
+        await AsyncStorage.setItem('userName', userName);
         
         // ajout du nom dans le state
         const action = {
           type: "user/setName",
-          payload: { name }
+          payload: { userName }
         };
         dispatch(action);
 

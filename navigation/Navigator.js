@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View } from 'react-native'
+import { View, Button } from 'react-native'
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -7,10 +7,14 @@ import HomeScreen from "../screens/HomeScreen";
 import AddCityScreen from "../screens/AddCityScreen";
 import ChangeNameScreen from "../screens/ChangeNameScreen";
 
-function DisplayHomeScreen() {
+function DisplayHomeScreen( {navigation} ) {
   return (
     <View>
     <HomeScreen></HomeScreen>
+    <Button
+        title="updatePage"
+        onPress={() => navigation.navigate('Changer nom')}
+      />
     </View>
   );
 }
@@ -54,6 +58,7 @@ export default function Navigator() {
         tabBarOptions={{
           activeTintColor: "darkblue",
           inactiveTintColor: "gray",
+          navigationOptions: {navigationOptions: () => doWhatever()}
         }}
       >
         <Tab.Screen name="Accueil" component={DisplayHomeScreen} />

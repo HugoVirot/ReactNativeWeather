@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { Image } from 'react-native-elements';
 import { connect } from 'react-redux';
+import CitiesList from '../components/CitiesList';
 import HeaderUserName from '../components/HeaderUserName';
 
 const styleSheet = {
@@ -28,6 +29,7 @@ const HomeScreen = () => {
             <Image source={{ uri: 'https://image.shutterstock.com/image-photo/weather-forecast-background-climate-change-260nw-1124541077.jpg' }}
                 style={{ width: 400, height: 100 }}>
             </Image>
+            <CitiesList></CitiesList>
         </View>
     )
 };

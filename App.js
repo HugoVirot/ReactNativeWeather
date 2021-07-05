@@ -4,10 +4,10 @@ import { init } from "@rematch/core";
 import { Provider } from "react-redux";
 import Navigator from "./navigation/Navigator";
 import { user } from './models/userModel';
-// import { meteo } from './models/meteoModel';
+import { meteo } from './models/meteoModel';
 
 const store = init({
-  models: { user },
+  models: { user, meteo },
 });
 
 export default function App() {

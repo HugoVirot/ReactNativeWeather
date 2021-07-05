@@ -5,7 +5,6 @@ import { getCityDataFromAPI } from "../utils/apiRequest";
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    
     this.searchedText = "";
 
     this.state = {
